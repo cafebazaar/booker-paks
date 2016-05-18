@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: brv-standalone-$(.group)
+spec:
+  replicas: 1
+  selector:
+    name: brv-standalone-$(.group)
+    mode: standalone
+    provider: brv-$(.group)
+  template:
+    metadata:
+      labels:
+        name: brv-standalone-$(.group)
+        mode: standalone
+        provider: brv-$(.group)
+        app: brv-standalone-$(.group)
+    spec:
+      volumes:
+        name: secret-volume
+        secret:
+          secretName: brv-tls-secret-$(.group)
+      containers:
+      - name: brv-standalone-$(.group)
+        image: quay.io/cafebazaar/booker-reservation:latest
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+          name: secret-volume
+          readOnly: true
+          mountPath: /etc/secret-volume
+        env:
+          - name: BRV_LOG_LEVEL
+            value: "DEBUG"
+          - name: BRV_ELASTIC_URL
+            value: "$(.elastic_url)"
+          - name: BRV_CERT_FILE
+            value: "/etc/secret-volume/tls.crt"
+          - name: BRV_KEY_FILE
+            value: "/etc/secret-volume/tls.key"
+          - name: BRV_CA_FILE
+            value: "/etc/secret-volume/tls.crt"

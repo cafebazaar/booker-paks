@@ -1,0 +1,14 @@
+name: Main Repo
+maintainers:
+  - Reza Mohammadi <reza@cafebazaar.ir>
+  - Mohammad Nasirifar <far.nasiri.m@gmail.com> (@colonelmo)
+  - Ali Javadi <ali.javadi@cafebazaaar.ir>
+
+packages:
+  - name: brv
+    url: paks/booker-reservation/pak.yaml
+    version: "0.1"
+    description: |
+      Booker project, a sample application to demonstrate usage of gRPC to
+      communicate between microservices and android clients.
+      https://github.com/cafebazaar/booker-reservation

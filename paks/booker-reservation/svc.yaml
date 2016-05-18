@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: brv-$(.group)
+  labels:
+    provider: brv-$(.group)
+spec:
+  ports:
+  - port: 8000
+  selector:
+    provider: brv-$(.group)

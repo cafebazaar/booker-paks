@@ -1,0 +1,8 @@
+$(if .domain)
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: brv-$(.group)
+data:
+  8101: "$(.namespace)/brv-$(.group)"
+$(end)
