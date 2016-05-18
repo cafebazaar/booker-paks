@@ -17,7 +17,7 @@ spec:
         app: brv-standalone-$(.group)
     spec:
       volumes:
-        name: secret-volume
+      - name: secret-volume
         secret:
           secretName: brv-tls-secret-$(.group)
       containers:
