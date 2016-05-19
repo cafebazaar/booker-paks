@@ -5,7 +5,9 @@ metadata:
   labels:
     provider: brv-$(.group)
 spec:
+  type: NodePort
   ports:
   - port: 8000
+    nodePort: $(.node_port)
   selector:
     provider: brv-$(.group)

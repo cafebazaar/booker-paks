@@ -10,17 +10,16 @@ resources:
   - rc.yaml
   - svc.yaml
   - secret.yaml
-  - ingress.yaml
 
 properties:
-  - name: domain
-    description: Domain
-    type: string
-    default: "brv.lb.cafebazaar.ir"
   - name: elastic_url
     description: Elasticsearch URL
     type: string
     default: "http://brv-db.lb.cafebazaar.ir"
+  - name: node_port
+    description: The port which our gRPC will be published on
+    type: int
+    default: 30801
   - name: tls_key
     description: Base64 SSL key
     type: string
