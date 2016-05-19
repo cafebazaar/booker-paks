@@ -20,3 +20,11 @@ packages:
       communicate between microservices and android clients.
       This is the resource manager.
       https://github.com/cafebazaar/booker-resources
+  - name: brcj
+    url: paks/booker-resources-json/pak.yaml
+    version: "0.2"
+    description: |
+      Booker project, a sample application to demonstrate usage of gRPC to
+      communicate between microservices and android clients.
+      This is the json gateway to the resource manager.
+      https://github.com/cafebazaar/booker-resources

@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: brcj-proxy-$(.group)
+spec:
+  replicas: 1
+  selector:
+    name: brcj-proxy-$(.group)
+    mode: standalone
+    provider: brcj-$(.group)
+  template:
+    metadata:
+      labels:
+        name: brcj-proxy-$(.group)
+        mode: standalone
+        provider: brcj-$(.group)
+        app: brcj-proxy-$(.group)
+    spec:
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: brcj-tls-secret-$(.group)
+      containers:
+      - name: brcj-proxy-$(.group)
+        image: quay.io/cafebazaar/booker-resources:latest
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+        - name: secret-volume
+          readOnly: true
+          mountPath: /etc/secret-volume
+        command:
+        - /bin/resources
+        - serve-json
+        - -a
+        - 0.0.0.0:8000
+        - -s
+        - $(.service_address)
+        env:
+          - name: BRC_LOG_LEVEL
+            value: "DEBUG"
+          - name: BRC_CERT_FILE
+            value: "/etc/secret-volume/tls.crt"
+          - name: BRC_KEY_FILE
+            value: "/etc/secret-volume/tls.key"
+          - name: BRC_CA_FILE
+            value: "/etc/secret-volume/tls.crt"

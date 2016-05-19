@@ -1,0 +1,21 @@
+$(if .domain)
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: brcj-$(.group)
+spec:
+$(if and .tls_cert .tls_key)
+  tls:
+    - hosts:
+      - $(.domain)
+      secretName: brcj-tls-secret-$(.group)
+$(end)
+  rules:
+  - host: $(.domain)
+    http:
+      paths:
+      - backend:
+          serviceName: brcj-$(.group)
+          servicePort: 8000
+        path: /
+$(end)
