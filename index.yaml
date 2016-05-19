@@ -12,3 +12,11 @@ packages:
       Booker project, a sample application to demonstrate usage of gRPC to
       communicate between microservices and android clients.
       https://github.com/cafebazaar/booker-reservation
+  - name: brc
+    url: paks/booker-resources/pak.yaml
+    version: "0.2"
+    description: |
+      Booker project, a sample application to demonstrate usage of gRPC to
+      communicate between microservices and android clients.
+      This is the resource manager.
+      https://github.com/cafebazaar/booker-resources
